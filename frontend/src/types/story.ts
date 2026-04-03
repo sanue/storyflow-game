@@ -2,6 +2,8 @@ export type Choice = {
   id: string;
   label: string;
   available?: boolean;
+  imageUrl?: string;
+  voiceUrl?: string;
 };
 
 export type StoryNodeType = "text" | "choice" | "ending";
@@ -11,4 +13,5 @@ export type StoryNode = {
   type: StoryNodeType;
   text: string;
   choices: Choice[];
+  bgmUrl?: string;
 };

@@ -124,12 +124,18 @@ public class StoryService {
     private StoryNodeResponse toResponse(StoryNode node, UserState state) {
         if ("choice".equals(node.getType())) {
             List<ChoiceView> choices = node.getChoices().stream()
-                    .map(c -> new ChoiceView(c.getId(), c.getLabel(), isChoiceAvailable(state, c)))
+                    .map(c -> new ChoiceView(
+                            c.getId(),
+                            c.getLabel(),
+                            isChoiceAvailable(state, c),
+                            c.getImageUrl(),
+                            c.getVoiceUrl()
+                    ))
                     .toList();
-            return new StoryNodeResponse(node.getId(), node.getType(), node.getText(), choices);
+            return new StoryNodeResponse(node.getId(), node.getType(), node.getText(), node.getBgmUrl(), choices);
         }
 
-        return new StoryNodeResponse(node.getId(), node.getType(), node.getText(), List.of());
+        return new StoryNodeResponse(node.getId(), node.getType(), node.getText(), node.getBgmUrl(), List.of());
     }
 
     private boolean isChoiceAvailable(UserState state, Choice choice) {
@@ -204,10 +210,10 @@ public class StoryService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "node not found: " + nodeId));
     }
 
-    public record ChoiceView(String id, String label, boolean available) {
+    public record ChoiceView(String id, String label, boolean available, String imageUrl, String voiceUrl) {
     }
 
-    public record StoryNodeResponse(String id, String type, String text, List<ChoiceView> choices) {
+    public record StoryNodeResponse(String id, String type, String text, String bgmUrl, List<ChoiceView> choices) {
     }
 }
 

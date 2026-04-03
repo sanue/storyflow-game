@@ -14,6 +14,18 @@ public class Choice {
     private String nextNodeId;
 
     /**
+     * 选择图片（占位）。
+     * <p>前端用于在选项卡片上展示。</p>
+     */
+    private String imageUrl;
+
+    /**
+     * 选择语音（占位）。
+     * <p>前端可选择直接播放文件；本项目也支持 WebAudio 占位播放。</p>
+     */
+    private String voiceUrl;
+
+    /**
      * 条件（最小实现）：{ "truth": ">=3", "resolve": "<=2" } 这种字符串表达式。
      * <p>为空/缺失表示恒成立。</p>
      */
@@ -55,6 +67,22 @@ public class Choice {
 
     public void setNextNodeId(String nextNodeId) {
         this.nextNodeId = nextNodeId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getVoiceUrl() {
+        return voiceUrl;
+    }
+
+    public void setVoiceUrl(String voiceUrl) {
+        this.voiceUrl = voiceUrl;
     }
 
     public Map<String, String> getCondition() {

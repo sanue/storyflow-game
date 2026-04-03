@@ -26,6 +26,11 @@ public class StoryDataInitializer implements ApplicationRunner {
     private final StoryNodeRepository storyNodeRepository;
     private final ObjectMapper objectMapper;
 
+    // 占位资源路径（当前实现用 WebAudio 也会播放占位声音，但仍保留结构字段）
+    private static final String DEFAULT_BGM_URL = "/audio/bgm_long_placeholder.mp3";
+    private static final String DEFAULT_CHOICE_IMAGE_URL = "/images/choice_placeholder.svg";
+    private static final String DEFAULT_CHOICE_VOICE_URL = "/audio/choice_voice_placeholder.mp3";
+
     public StoryDataInitializer(StoryNodeRepository storyNodeRepository, ObjectMapper objectMapper) {
         this.storyNodeRepository = storyNodeRepository;
         this.objectMapper = objectMapper;
@@ -38,6 +43,14 @@ public class StoryDataInitializer implements ApplicationRunner {
             // 兼容旧数据：如果新字段 type 缺失，就重新导入覆盖
             needsImport = storyNodeRepository.findById(StoryService.START_NODE_ID)
                     .map(StoryNode::getType)
+                    .map(Objects::isNull)
+                    .orElse(true);
+        }
+
+        if (!needsImport) {
+            // 兼容旧数据：如果新字段 bgmUrl 缺失，也重新导入覆盖
+            needsImport = storyNodeRepository.findById(StoryService.START_NODE_ID)
+                    .map(StoryNode::getBgmUrl)
                     .map(Objects::isNull)
                     .orElse(true);
         }
@@ -65,6 +78,7 @@ public class StoryDataInitializer implements ApplicationRunner {
         node.setId(raw.id);
         node.setType(raw.type);
         node.setText(raw.content);
+        node.setBgmUrl(DEFAULT_BGM_URL);
         node.setAutoNextNodeId(raw.autoNext);
 
         List<Choice> choices = new ArrayList<>();
@@ -74,6 +88,8 @@ public class StoryDataInitializer implements ApplicationRunner {
                 c.setId(rawChoice.id);
                 c.setLabel(rawChoice.text);
                 c.setNextNodeId(rawChoice.nextNodeId);
+                c.setImageUrl(DEFAULT_CHOICE_IMAGE_URL);
+                c.setVoiceUrl(DEFAULT_CHOICE_VOICE_URL);
                 c.setCondition(safeStringMap(rawChoice.condition));
                 c.setEffect(safeIntegerMap(rawChoice.effect));
                 choices.add(c);

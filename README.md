@@ -85,12 +85,4 @@ npm run dev
 
 浏览器：<http://localhost:3000> ，游戏页：<http://localhost:3000/game>
 
----
-
-## ディレクトリ概要（日本語）
-
-- **frontend**：Next.js App Router、`/` と `/game`、コンポーネントは `GameContainer` / `StoryDisplay` / `ChoiceList`。
-- **backend**：`controller` / `service` / `repository` / `model`。MongoDB は `application.properties` の `spring.data.mongodb.uri` で指定。
-- **モデル**：`StoryNode`（`story_nodes`）、`Choice`（ノード内埋め込み）、`UserState`（`user_states`）。
-
-JDK は **17 以上**、MongoDB 起動後に `mvn spring-boot:run`、フロントは `npm run dev`。
+ 
