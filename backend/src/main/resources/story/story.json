@@ -1,0 +1,249 @@
+{
+  "nodes": [
+    {
+      "id": "node_01_start",
+      "type": "text",
+      "content": "列车缓缓驶入雾城。灰白的雾气像潮水一样贴在车窗外，模糊了远处的灯光。你握着那封匿名信，纸张微微发潮，上面只有一句话——“如果你还想找回林汐，今晚别回家。”十年未归的城市，此刻显得既熟悉又陌生。",
+      "choices": [],
+      "auto_next": "node_02_choice_arrival"
+    },
+    {
+      "id": "node_02_choice_arrival",
+      "type": "choice",
+      "content": "你站在站台，冷风裹着雾气从脚边掠过。你必须决定下一步。",
+      "choices": [
+        {
+          "id": "c_01",
+          "text": "立刻前往匿名信提到的七码头",
+          "next_node_id": "node_05_dock",
+          "condition": {},
+          "effect": { "resolve": 1 }
+        },
+        {
+          "id": "c_02",
+          "text": "先去姐姐旧住处查看线索",
+          "next_node_id": "node_03_home",
+          "condition": {},
+          "effect": { "memory": 1 }
+        }
+      ],
+      "auto_next": null
+    },
+    {
+      "id": "node_03_home",
+      "type": "text",
+      "content": "旧公寓的门发出沉闷的响声。屋内积灰，空气里弥漫着淡淡的潮味。桌上散落着文件，一支录音笔躺在角落，像是在等待你。",
+      "choices": [],
+      "auto_next": "node_04_choice_home"
+    },
+    {
+      "id": "node_04_choice_home",
+      "type": "choice",
+      "content": "你开始翻找线索。",
+      "choices": [
+        {
+          "id": "c_03",
+          "text": "检查录音笔",
+          "next_node_id": "node_04a_recorder",
+          "condition": {},
+          "effect": { "truth": 1 }
+        },
+        {
+          "id": "c_04",
+          "text": "查看照片",
+          "next_node_id": "node_04b_photo",
+          "condition": {},
+          "effect": { "memory": 1 }
+        }
+      ],
+      "auto_next": null
+    },
+    {
+      "id": "node_04a_recorder",
+      "type": "text",
+      "content": "录音笔发出断裂的杂音，随后传来林汐的声音：“如果我消失了……别相信他们……”声音戛然而止。",
+      "choices": [],
+      "auto_next": "node_06_meet_ayaan"
+    },
+    {
+      "id": "node_04b_photo",
+      "type": "text",
+      "content": "照片里，你和林汐站在研究所前，背后还有一个模糊的人影。照片背面写着一句话：“回声不会说谎。”",
+      "choices": [],
+      "auto_next": "node_06_meet_ayaan"
+    },
+    {
+      "id": "node_05_dock",
+      "type": "text",
+      "content": "第七码头空无一人。海水拍打着铁栏，雾气在灯光下翻滚。远处似乎有一个熟悉的背影，你下意识向前。",
+      "choices": [],
+      "auto_next": "node_07_echo_hint"
+    },
+    {
+      "id": "node_06_meet_ayaan",
+      "type": "choice",
+      "content": "门外，一个女人靠在墙边。“沈予安，”她自我介绍，“我在调查失踪案，你姐姐的名字，我知道。”她的目光锐利而冷静。",
+      "choices": [
+        {
+          "id": "c_05",
+          "text": "选择合作",
+          "next_node_id": "node_08_bookstore",
+          "condition": {},
+          "effect": { "trust_ayaan": 2 }
+        },
+        {
+          "id": "c_06",
+          "text": "保持警惕",
+          "next_node_id": "node_08_bookstore",
+          "condition": {},
+          "effect": { "resolve": 1 }
+        }
+      ],
+      "auto_next": null
+    },
+    {
+      "id": "node_07_echo_hint",
+      "type": "text",
+      "content": "雾中那道身影转瞬即逝，你的脑海突然闪过破碎的画面——玻璃、白光、有人在呼喊你的名字。",
+      "choices": [],
+      "auto_next": "node_08_bookstore"
+    },
+    {
+      "id": "node_08_bookstore",
+      "type": "text",
+      "content": "旧城区书店灯光昏黄。书架间弥漫着纸张的气味。顾言站在柜台后，像是早就知道你会来。",
+      "choices": [],
+      "auto_next": "node_09_choice_guyan"
+    },
+    {
+      "id": "node_09_choice_guyan",
+      "type": "choice",
+      "content": "顾言轻声说：“你姐姐来过。”他的语气平静，却带着隐约的意味。",
+      "choices": [
+        {
+          "id": "c_07",
+          "text": "相信他，继续追问",
+          "next_node_id": "node_10_basement",
+          "condition": {},
+          "effect": { "trust_guyan": 2 }
+        },
+        {
+          "id": "c_08",
+          "text": "质疑他的动机",
+          "next_node_id": "node_10_basement",
+          "condition": {},
+          "effect": { "resolve": 1 }
+        }
+      ],
+      "auto_next": null
+    },
+    {
+      "id": "node_10_basement",
+      "type": "text",
+      "content": "地下室投影出扭曲的画面：实验舱、白光，还有林汐的背影。她站在玻璃前，像是在做某个决定。",
+      "choices": [],
+      "auto_next": "node_11_dock_return"
+    },
+    {
+      "id": "node_11_dock_return",
+      "type": "text",
+      "content": "你再次来到七码头。夜色更深，雾更浓。空气中仿佛有某种东西在呼唤你。",
+      "choices": [],
+      "auto_next": "node_12_choice_echo"
+    },
+    {
+      "id": "node_12_choice_echo",
+      "type": "choice",
+      "content": "雾中传来声音：“你想找回她，还是想知道真相？”",
+      "choices": [
+        {
+          "id": "c_09",
+          "text": "找回她",
+          "next_node_id": "node_13_echo_space",
+          "condition": {},
+          "effect": { "resolve": 1 }
+        },
+        {
+          "id": "c_10",
+          "text": "知道真相",
+          "next_node_id": "node_13_echo_space",
+          "condition": {},
+          "effect": { "truth": 1 }
+        }
+      ],
+      "auto_next": null
+    },
+    {
+      "id": "node_13_echo_space",
+      "type": "text",
+      "content": "世界骤然安静。你站在一片破碎的空间中，无数记忆碎片漂浮在空中。这里就是回声空间。",
+      "choices": [],
+      "auto_next": "node_14_lab"
+    },
+    {
+      "id": "node_14_lab",
+      "type": "text",
+      "content": "研究所内部冰冷而安静。墙上的标识写着“记忆维护计划”。你意识到，这里隐藏着整个城市的秘密。",
+      "choices": [],
+      "auto_next": "node_15_truth"
+    },
+    {
+      "id": "node_15_truth",
+      "type": "text",
+      "content": "档案显示，十年前的事故并非意外，而是一次人为的记忆切除。你自己的名字赫然在列。",
+      "choices": [],
+      "auto_next": "node_16_final_choice"
+    },
+    {
+      "id": "node_16_final_choice",
+      "type": "choice",
+      "content": "许弦站在你面前：“真相会毁掉一切。”沈予安冷冷回应：“谎言才会。”你必须选择。",
+      "choices": [
+        {
+          "id": "c_11",
+          "text": "帮助许弦封存真相",
+          "next_node_id": "ending_silence",
+          "condition": { "truth": "<=2" },
+          "effect": {}
+        },
+        {
+          "id": "c_12",
+          "text": "公开真相",
+          "next_node_id": "ending_dawn",
+          "condition": { "truth": ">=3", "resolve": ">=2" },
+          "effect": {}
+        },
+        {
+          "id": "c_13",
+          "text": "进入回声空间寻找林汐",
+          "next_node_id": "ending_echo",
+          "condition": { "memory": ">=2" },
+          "effect": {}
+        }
+      ],
+      "auto_next": null
+    },
+    {
+      "id": "ending_silence",
+      "type": "ending",
+      "content": "雾城恢复平静。人们继续生活，仿佛什么都没发生。你站在人群中，却再也想不起她的脸。手机屏幕亮起，一条未读消息静静闪烁。",
+      "choices": [],
+      "auto_next": null
+    },
+    {
+      "id": "ending_dawn",
+      "type": "ending",
+      "content": "真相被公开，雾层逐渐散去。城市陷入混乱，却也迎来了久违的清晨。你在光中看见林汐的身影，她对你微笑。",
+      "choices": [],
+      "auto_next": null
+    },
+    {
+      "id": "ending_echo",
+      "type": "ending",
+      "content": "你走进回声深处，与林汐重逢。现实逐渐远去，你们留在记忆构成的世界中。这里没有雾，也没有遗忘。",
+      "choices": [],
+      "auto_next": null
+    }
+  ]
+}
+
